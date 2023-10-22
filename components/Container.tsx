@@ -1,7 +1,20 @@
 import { PropsWithChildren } from "react";
 
-const Container = ({ children }: PropsWithChildren) => {
-  return <div className="container mx-auto bg-gray-900">{children}</div>;
+type ContainerType = {
+  className?: string;
+};
+
+const Container = ({
+  children,
+  className,
+}: PropsWithChildren<ContainerType>) => {
+  return (
+    <div
+      className={`px-4 lg:px-64 md:px-32 container mx-auto ${className ?? ""}`}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Container;
