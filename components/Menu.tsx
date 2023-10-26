@@ -1,19 +1,23 @@
 import { PropsWithChildren } from "react";
 import Container from "./Container";
+import contents from "./content/contents";
 
-const menuItems = ["Bio", "Experience", "Skills", "Contact"];
+type MenuType = {
+  onMenuClick: (id: number) => void;
+};
 
-const Menu = ({ children }: PropsWithChildren) => {
+const Menu = ({ children, onMenuClick }: PropsWithChildren<MenuType>) => {
   return (
-    <div className="bg-blue-violet-900">
+    <div className="bg-blue-violet-900 fixed w-full z-20">
       <Container>
         <div className="flex justify-end gap-6 py-3 pr-6 font-semibold">
-          {menuItems.map((menuItem) => (
+          {contents.map((content) => (
             <div
               className="hover:font-bold hover:cursor-pointer"
-              key={menuItem}
+              key={content.id}
+              onClick={() => onMenuClick(content.id)}
             >
-              {menuItem}
+              {content.name}
             </div>
           ))}
         </div>

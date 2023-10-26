@@ -1,8 +1,9 @@
-import ContentContainer from "./ContentContainer";
+import { forwardRef } from "react";
+import ContentContainer from "../ContentContainer";
 
-const Form = () => {
+const Form = forwardRef<HTMLDivElement>((props, ref) => {
   return (
-    <ContentContainer>
+    <ContentContainer ref={ref}>
       <form>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
@@ -81,6 +82,8 @@ const Form = () => {
       </form>
     </ContentContainer>
   );
-};
+});
+
+Form.displayName = "Contact";
 
 export default Form;

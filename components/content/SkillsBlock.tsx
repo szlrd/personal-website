@@ -1,4 +1,5 @@
-import ContentContainer from "./ContentContainer";
+import { forwardRef } from "react";
+import ContentContainer from "../ContentContainer";
 
 type SkillType = {
   name: string;
@@ -108,7 +109,7 @@ const SkillBar = ({ skill }: { skill: SkillType }) => {
   return (
     <div className="h-8 bg-blue-violet-200 rounded-md overflow-hidden shadow-lg hover:bg-blue-violet-300">
       <div
-        className={`bg-blue-violet-800 hover:bg-blue-violet-900 h-full flex items-center`}
+        className={`bg-blue-violet-800 border-blue-violet-800 border-2 hover:bg-blue-violet-900 h-full flex items-center`}
         style={{ width: `${skill.score}%` }}
       >
         <div className="ml-4">{skill.name}</div>
@@ -117,9 +118,9 @@ const SkillBar = ({ skill }: { skill: SkillType }) => {
   );
 };
 
-const SkillsBlock = () => {
+const SkillsBlock = forwardRef<HTMLDivElement>((props, ref) => {
   return (
-    <ContentContainer>
+    <ContentContainer ref={ref}>
       <h2>Skills</h2>
       <div className="flex flex-col gap-6">
         {skillBlocks.map((skillBlock, index) => (
@@ -128,6 +129,8 @@ const SkillsBlock = () => {
       </div>
     </ContentContainer>
   );
-};
+});
+
+SkillsBlock.displayName = "Skills";
 
 export default SkillsBlock;

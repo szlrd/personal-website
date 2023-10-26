@@ -1,20 +1,30 @@
-import BioBlock from "../components/BioBlock";
+import { useRef } from "react";
 import Container from "../components/Container";
-import ExperienceBlock from "../components/ExperienceBlock";
-import Form from "../components/Form";
 import Menu from "../components/Menu";
-import SkillsBlock from "../components/SkillsBlock";
+import contents from "../components/content/contents";
 
 const Home = () => {
+  const contentRefs = useRef([]);
+
+  const handleMenuClick = (id: number) => {
+    if (!contentRefs.current || !contentRefs.current[id]) {
+      return;
+    }
+
+    contentRefs.current[id].scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
-      <Menu />
+      <Menu onMenuClick={handleMenuClick} />
       <Container>
         <div className="flex flex-col pb-24 divide-blue-violet-900 divide-y">
-          <BioBlock />
-          <ExperienceBlock />
-          <SkillsBlock />
-          <Form />
+          {contents.map((content) => (
+            <content.component
+              key={content.id}
+              ref={(el) => (contentRefs.current[content.id] = el)}
+            />
+          ))}
         </div>
       </Container>
     </>

@@ -1,9 +1,10 @@
 import Image from "next/image";
-import ContentContainer from "./ContentContainer";
+import ContentContainer from "../ContentContainer";
+import { forwardRef } from "react";
 
-const BioBlock = () => {
+const BioBlock = forwardRef<HTMLDivElement>((props, ref) => {
   return (
-    <ContentContainer>
+    <ContentContainer ref={ref}>
       <div className="gap-12 flex items-center">
         <Image
           src="/portrait.jpg"
@@ -28,6 +29,8 @@ const BioBlock = () => {
       </div>
     </ContentContainer>
   );
-};
+});
+
+BioBlock.displayName = "BioBlock";
 
 export default BioBlock;

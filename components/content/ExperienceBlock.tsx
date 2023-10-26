@@ -1,5 +1,6 @@
 import Image from "next/image";
-import ContentContainer from "./ContentContainer";
+import ContentContainer from "../ContentContainer";
+import { forwardRef } from "react";
 
 type ExperienceType = {
   title: string;
@@ -68,18 +69,18 @@ const ExperienceCard = ({ experience }: { experience: ExperienceType }) => {
   );
 };
 
-const ExperienceBlock = () => {
+const ExperienceBlock = forwardRef<HTMLDivElement>((props, ref) => {
   return (
-    <ContentContainer>
+    <ContentContainer ref={ref}>
       <div className="flex flex-col px-64">
-        {/* <div> */}
         {experienceList.map((experience) => (
           <ExperienceCard experience={experience} key={experience.name} />
         ))}
-        {/* </div> */}
       </div>
     </ContentContainer>
   );
-};
+});
+
+ExperienceBlock.displayName = "Experience";
 
 export default ExperienceBlock;
